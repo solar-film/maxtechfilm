@@ -402,75 +402,75 @@
                 </div>
 
                 <div class="bg-white rounded-3xl p-8 shadow-2xl text-gray-800">
-                    <form action="#" method="POST" class="space-y-4">
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium mb-1">ชื่อ-นามสกุล *</label>
-                                <input type="text" required
-                                    class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                                    placeholder="ระบุชื่อของคุณ">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-1">ชื่อร้าน / บริษัท</label>
-                                <input type="text"
-                                    class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                                    placeholder="ถ้ามี">
-                            </div>
-                        </div>
+<form id="contact-form" class="space-y-4">
+    <div class="grid md:grid-cols-2 gap-4">
+        <div>
+            <label class="block text-sm font-medium mb-1 text-gray-700">ชื่อ-นามสกุล *</label>
+            <input type="text" name="fullname" required
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition"
+                placeholder="ระบุชื่อของคุณ">
+        </div>
+        <div>
+            <label class="block text-sm font-medium mb-1 text-gray-700">ชื่อร้าน / บริษัท</label>
+            <input type="text" name="company"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition"
+                placeholder="ถ้ามี">
+        </div>
+    </div>
 
-                        <div>
-                            <label class="block text-sm font-medium mb-1">ประเภทธุรกิจ *</label>
-                            <select required
-                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
-                                <option value="">เลือกประเภทธุรกิจ</option>
-                                <option>ร้านฟิล์มรถยนต์</option>
-                                <option>ร้านผ้าม่าน</option>
-                                <option>ผู้รับเหมา/ก่อสร้าง</option>
-                                <option>ช่างฟิล์มฟรีแลนซ์</option>
-                                <option>ตัวแทนจำหน่าย</option>
-                                <option>อื่นๆ</option>
-                            </select>
-                        </div>
+    <div>
+        <label class="block text-sm font-medium mb-1 text-gray-700">ประเภทธุรกิจ *</label>
+        <select name="business_type" required
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition">
+            <option value="">เลือกประเภทธุรกิจ</option>
+            <option value="ร้านฟิล์มรถยนต์">ร้านฟิล์มรถยนต์</option>
+            <option value="ร้านผ้าม่าน">ร้านผ้าม่าน</option>
+            <option value="ผู้รับเหมา/ก่อสร้าง">ผู้รับเหมา/ก่อสร้าง</option>
+            <option value="ช่างฟิล์มฟรีแลนซ์">ช่างฟิล์มฟรีแลนซ์</option>
+            <option value="ตัวแทนจำหน่าย">ตัวแทนจำหน่าย</option>
+            <option value="อื่นๆ">อื่นๆ</option>
+        </select>
+    </div>
 
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium mb-1">จังหวัด *</label>
-                                <input type="text" required
-                                    class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                                    placeholder="จังหวัดที่ให้บริการ">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-1">เบอร์โทรศัพท์ *</label>
-                                <input type="tel" required
-                                    class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                                    placeholder="08x-xxx-xxxx">
-                            </div>
-                        </div>
+    <div class="grid md:grid-cols-2 gap-4">
+        <div>
+            <label class="block text-sm font-medium mb-1 text-gray-700">จังหวัด *</label>
+            <input type="text" name="province" required
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition"
+                placeholder="จังหวัดที่ให้บริการ">
+        </div>
+        <div>
+            <label class="block text-sm font-medium mb-1 text-gray-700">เบอร์โทรศัพท์ *</label>
+            <input type="tel" name="phone" required
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition"
+                placeholder="08x-xxx-xxxx">
+        </div>
+    </div>
 
-                        <div>
-                            <label class="block text-sm font-medium mb-1">ความสนใจ</label>
-                            <select
-                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
-                                <option>สมัครเป็นตัวแทนจำหน่าย</option>
-                                <option>ขอราคาส่งรายม้วน</option>
-                                <option>สอบถามข้อมูลทางเทคนิค</option>
-                            </select>
-                        </div>
+    <div>
+        <label class="block text-sm font-medium mb-1 text-gray-700">ความสนใจ</label>
+        <select name="interest"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition">
+            <option value="สมัครเป็นตัวแทนจำหน่าย">สมัครเป็นตัวแทนจำหน่าย</option>
+            <option value="ขอราคาส่งรายม้วน">ขอราคาส่งรายม้วน</option>
+            <option value="สอบถามข้อมูลทางเทคนิค">สอบถามข้อมูลทางเทคนิค</option>
+        </select>
+    </div>
 
-                        <div>
-                            <label class="block text-sm font-medium mb-1">ข้อความเพิ่มเติม</label>
-                            <textarea
-                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none h-24"
-                                placeholder="รายละเอียดอื่นๆ ที่คุณต้องการทราบ"></textarea>
-                        </div>
+    <div>
+        <label class="block text-sm font-medium mb-1 text-gray-700">ข้อความเพิ่มเติม</label>
+        <textarea name="message"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none h-24 transition"
+            placeholder="รายละเอียดอื่นๆ ที่คุณต้องการทราบ"></textarea>
+    </div>
 
-                        <button type="submit"
-                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-lg shadow-lg transition duration-300">
-                            ส่งข้อมูล / สมัครตัวแทน
-                        </button>
-                        <p class="text-center text-xs text-gray-400 mt-4">
-                            ข้อมูลของคุณจะถูกเก็บเป็นความลับเพื่อใช้ในการติดต่อธุรกิจเท่านั้น</p>
-                    </form>
+    <button type="submit" id="submit-btn"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-lg shadow-lg transition duration-300 disabled:bg-gray-400">
+        ส่งข้อมูล / สมัครตัวแทน
+    </button>
+    <p class="text-center text-xs text-gray-400 mt-4">
+        ข้อมูลของคุณจะถูกเก็บเป็นความลับเพื่อใช้ในการติดต่อธุรกิจเท่านั้น</p>
+</form>
                 </div>
             </div>
         </div>
@@ -702,22 +702,58 @@
     </footer>
 
     <!-- Fixed Bottom Bar for Mobile -->
-<div class="fixed bottom-0 left-0 right-0 z-[60] bg-red-600 text-white py-2 px-4 shadow-2xl lg:relative lg:bottom-auto lg:top-0 lg:order-first">
+<div class="bg-red-600 text-white py-2.5 px-4 shadow-md sticky top-0 z-[100] border-b border-red-700">
     <div class="container mx-auto flex justify-center items-center gap-3">
-        <span class="flex h-3 w-3 relative">
+        <span class="flex h-2.5 w-2.5 relative">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
         </span>
         
-        <p class="text-sm md:text-base font-bold tracking-wide">
-            ด่วน! โปรโมชั่น <span class="text-yellow-300">3,500 บาท</span> มีจำนวนจำกัดต่อเดือน!
+        <p class="text-[13px] md:text-base font-bold tracking-wide text-center">
+            ด่วน! โปรโมชั่น <span class="text-yellow-300 underline underline-offset-4">3,500 บาท</span> มีจำนวนจำกัดต่อเดือน!
         </p>
-        
-        <a href="https://lin.ee/IAEA66b" class="hidden sm:block bg-white text-red-600 px-4 py-1 rounded-full text-xs font-black hover:bg-yellow-300 transition-colors">
+
+        <a href="https://lin.ee/IAEA66b" class="hidden sm:inline-block bg-white text-red-600 px-4 py-1 rounded-full text-xs font-black hover:bg-yellow-300 transition-colors ml-2">
             เช็กสิทธิ์เลย
         </a>
     </div>
 </div>
+
+    <!-- สำหรับส่งข้อมูลฟอร์ม -->
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwLmSs4dkyJ9-sKLCwaNe3O0wuf6efxhqJniz52_A2DGSfGWlIEqoMbyHBn8iHsmh0i_Q/exec';
+    const form = document.getElementById('contact-form');
+    const btn = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        
+        // ล็อกปุ่มเพื่อป้องกันการกดซ้ำ
+        btn.disabled = true;
+        btn.innerText = 'กำลังส่งข้อมูล...';
+
+        fetch(scriptURL, { 
+            method: 'POST', 
+            body: new FormData(form)
+        })
+        .then(response => {
+            console.log('Success!', response);
+            alert('ขอบคุณค่ะ! ระบบได้รับข้อมูลของท่านเรียบร้อยแล้ว ทีมงานจะติดต่อกลับโดยเร็วที่สุด');
+            
+            // ปลดล็อกปุ่มและล้างข้อมูลในฟอร์ม
+            btn.disabled = false;
+            btn.innerText = 'ส่งข้อมูล / สมัครตัวแทน';
+            form.reset();
+        })
+        .catch(error => {
+            console.error('Error!', error.message);
+            alert('เกิดข้อผิดพลาด: ไม่สามารถส่งข้อมูลได้ในขณะนี้ กรุณาลองใหม่อีกครั้ง หรือติดต่อผ่าน LINE');
+            
+            btn.disabled = false;
+            btn.innerText = 'ส่งข้อมูล / สมัครตัวแทน';
+        });
+    });
+</script>
 
 </body>
 
