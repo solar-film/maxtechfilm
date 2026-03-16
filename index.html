@@ -306,10 +306,8 @@
 
                     <p class="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl font-light leading-relaxed">
                         เปลี่ยนมาใช้ Maxtech Black Carbon Series ของแท้ เกรดพรีเมียม
-                        <span
-                            class="block md:inline font-bold text-white border-b-4 border-blue-500 pb-1">เริ่มต้นราคาส่งตั้งแต่ม้วนแรก</span>
+                        <span class="block md:inline font-bold text-white">เริ่มต้นราคาส่งตั้งแต่ม้วนแรก</span>
                     </p>
-
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
                         <a href="#dealer"
                             class="group flex items-center justify-center gap-2 bg-[#1d4ed8] hover:bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold text-xl transition-all shadow-lg active:scale-95 w-full sm:w-auto">
@@ -985,11 +983,11 @@
                 <div class="lg:col-span-5 space-y-10">
                     <div>
                         <h2 class="text-4xl md:text-6xl font-black mb-6 leading-[1.1] tracking-tight">
-                            พร้อมเริ่มต้นธุรกิจกับ 
+                            พร้อมเริ่มต้นธุรกิจกับ
                             <span class="text-[#fff848] drop-shadow-lg">MAXTECH</span> หรือยัง?
                         </h2>
                         <p class="text-blue-100 text-xl font-light leading-relaxed">
-                            ติดต่อทีมงานเพื่อขอราคาส่ง สมัครดีลเลอร์ และรับคำปรึกษาได้ทันที 
+                            ติดต่อทีมงานเพื่อขอราคาส่ง สมัครดีลเลอร์ และรับคำปรึกษาได้ทันที
                             เรามีทีมผู้เชี่ยวชาญพร้อมซัพพอร์ตคุณทุกขั้นตอน
                         </p>
                     </div>
@@ -1045,17 +1043,20 @@
                     </div>
                 </div>
 
-<div class="lg:col-span-7">
+                <div class="lg:col-span-7">
                     <div class="bg-white rounded-[3rem] p-8 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.3)] text-gray-800">
                         <form action="https://formspree.io/f/mjgaavqv" method="POST" id="contact-form"
-                            class="space-y-6"> <div class="grid md:grid-cols-2 gap-6">
+                            class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
                                 <div>
-                                    <label class="block text-base font-bold mb-2 text-gray-600 ml-1">ชื่อ-นามสกุล *</label>
+                                    <label class="block text-base font-bold mb-2 text-gray-600 ml-1">ชื่อ-นามสกุล
+                                        *</label>
                                     <input type="text" name="full_name" required placeholder="สมชาย รักงานดี"
                                         class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl text-lg focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all placeholder:opacity-50">
                                 </div>
                                 <div>
-                                    <label class="block text-base font-bold mb-2 text-gray-600 ml-1">ชื่อร้าน / บริษัท</label>
+                                    <label class="block text-base font-bold mb-2 text-gray-600 ml-1">ชื่อร้าน /
+                                        บริษัท</label>
                                     <input type="text" name="company_name" placeholder="แม็กซ์เทค ฟิล์ม"
                                         class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl text-lg focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all placeholder:opacity-50">
                                 </div>
@@ -1082,7 +1083,8 @@
                                         class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl text-lg focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all">
                                 </div>
                                 <div>
-                                    <label class="block text-base font-bold mb-2 text-gray-600 ml-1">เบอร์โทรศัพท์ *</label>
+                                    <label class="block text-base font-bold mb-2 text-gray-600 ml-1">เบอร์โทรศัพท์
+                                        *</label>
                                     <input type="tel" name="phone" required placeholder="08x-xxx-xxxx"
                                         class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl text-lg focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all">
                                 </div>
@@ -1100,7 +1102,8 @@
                             </div>
 
                             <div>
-                                <label class="block text-base font-bold mb-2 text-gray-600 ml-1">ข้อความเพิ่มเติม</label>
+                                <label
+                                    class="block text-base font-bold mb-2 text-gray-600 ml-1">ข้อความเพิ่มเติม</label>
                                 <textarea name="message" placeholder="ระบุรายละเอียดที่ต้องการสอบถาม..."
                                     class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl text-lg focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all h-28 resize-none"></textarea>
                             </div>
@@ -1396,76 +1399,96 @@
         </div>
     </div>
 
-    <!-- สำหรับส่งข้อมูลฟอร์ม -->
-    <script type="text/javascript">
-        var submitted = false;
-
-        // ฟังก์ชันเมื่อส่งข้อมูลสำเร็จ
-        function handleFormSuccess() {
-            const form = document.getElementById('contact-form');
-            const btn = document.getElementById('submit-btn');
-
-            // ล้างค่าฟอร์มและคืนค่าปุ่ม
-            form.reset();
-            btn.disabled = false;
-            btn.innerText = 'ส่งข้อมูล / สมัครตัวแทน';
-
-            // แสดง Modal
-            const modal = document.getElementById('success-modal');
-            const content = document.getElementById('modal-content');
-
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                content.classList.remove('scale-95', 'opacity-0');
-                content.classList.add('scale-100', 'opacity-100');
-            }, 10);
-        }
-
-        // ฟังก์ชันปิด Modal
-        function closeModal() {
-            const modal = document.getElementById('success-modal');
-            const content = document.getElementById('modal-content');
-
-            content.classList.remove('scale-100', 'opacity-100');
-            content.classList.add('scale-95', 'opacity-0');
-
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
-        }
-
-        // ดักจับการส่งฟอร์มเพื่อเปลี่ยนสถานะปุ่ม
-        document.getElementById('contact-form').addEventListener('submit', function () {
-            const btn = document.getElementById('submit-btn');
-            btn.disabled = true;
-            btn.innerText = 'กำลังส่งข้อมูล...';
-        });
-    </script>
-
-    </script>
     <!-- POP UP แจ้งส่งข้อมูลสำเร็จ -->
     <div id="success-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center px-4">
-        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+        <div class="absolute inset-0 bg-blue-950/40 backdrop-blur-md"></div>
 
-        <div class="relative bg-white rounded-3xl p-8 md:p-10 shadow-2xl max-w-sm w-full text-center transform transition-all scale-95 opacity-0 duration-300"
+        <div class="relative bg-white rounded-[2.5rem] p-8 md:p-12 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] max-w-sm w-full text-center transform transition-all scale-95 opacity-0 duration-300 border border-white/20"
             id="modal-content">
-            <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-green-100 mb-6">
-                <svg class="h-10 w-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+            <div class="mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-green-50 mb-8 relative">
+                <div class="absolute inset-0 rounded-full bg-green-100 animate-ping opacity-20"></div>
+                <svg class="h-12 w-12 text-green-500 relative z-10" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
                 </svg>
             </div>
 
-            <h3 class="text-2xl font-bold text-gray-900 mb-2">ส่งข้อมูลสำเร็จ!</h3>
-            <p class="text-gray-600 mb-8">ขอบคุณที่ไว้วางใจ MAXTECH
-                ทีมงานได้รับข้อมูลแล้วและจะติดต่อกลับโดยเร็วที่สุดครับ</p>
+            <h3 class="text-3xl font-black text-gray-900 mb-4 tracking-tight">ส่งข้อมูลสำเร็จ!</h3>
+            <p class="text-gray-500 mb-10 text-lg font-light leading-relaxed">
+                ขอบคุณที่ร่วมธุรกิจกับ <span class="font-bold text-blue-600">MAXTECH</span><br>
+                ทีมงานจะติดต่อกลับหาคุณโดยเร็วที่สุด
+            </p>
 
             <button onclick="closeModal()"
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95">
-                ตกลง
+                class="w-full bg-gradient-to-r from-blue-700 to-blue-600 hover:from-blue-600 hover:to-blue-500 text-white font-bold py-5 rounded-2xl shadow-xl shadow-blue-500/20 transition-all active:scale-95 text-xl">
+                รับทราบ
             </button>
         </div>
     </div>
 
+    <script type="text/javascript">
+        const form = document.getElementById('contact-form');
+        const btn = document.getElementById('submit-btn');
+        const modal = document.getElementById('success-modal');
+        const modalContent = document.getElementById('modal-content');
+
+        // 1. ฟังก์ชันเมื่อกดส่งฟอร์ม
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); // หยุดการเปลี่ยนหน้าไป Formspree
+
+            // เปลี่ยนสถานะปุ่ม
+            btn.disabled = true;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span>กำลังส่งข้อมูล...</span>';
+            btn.classList.add('opacity-70');
+
+            // ส่งข้อมูลแบบ AJAX
+            const formData = new FormData(form);
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        showModal(); // ถ้าสำเร็จ โชว์ Pop-up
+                        form.reset(); // ล้างข้อมูล
+                    } else {
+                        alert('เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
+                    }
+                })
+                .catch(error => {
+                    alert('ไม่สามารถส่งข้อมูลได้ กรุณาตรวจสอบอินเทอร์เน็ต');
+                })
+                .finally(() => {
+                    // คืนค่าปุ่ม
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('opacity-70');
+                });
+        });
+
+        // 2. ฟังก์ชันแสดง Modal
+        function showModal() {
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        // 3. ฟังก์ชันปิด Modal
+        function closeModal() {
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                // เพิ่มบรรทัดนี้ถ้าต้องการให้เลื่อนขึ้นบนสุดหลังจากปิด Pop-up
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 300);
+        }
+    </script>
 </body>
 
 </html>
