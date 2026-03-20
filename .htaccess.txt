@@ -1,0 +1,13 @@
+# เริ่มต้นการตั้งค่าการใช้แคช
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # ตั้งค่าไฟล์รูปภาพ (.webp) ให้เก็บไว้ 1 ปี
+  ExpiresByType image/webp "access plus 1 year"
+  
+  # ตั้งค่าไฟล์ CSS ให้เก็บไว้ 1 เดือน (เผื่อมีการแก้ไขดีไซน์)
+  ExpiresByType text/css "access plus 1 month"
+  
+  # ไฟล์ไอคอนต่างๆ
+  ExpiresByType image/x-icon "access plus 1 year"
+</IfModule>
