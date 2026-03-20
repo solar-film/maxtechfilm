@@ -1,13 +1,24 @@
-# เริ่มต้นการตั้งค่าการใช้แคช
+# แคชไฟล์ต่างๆ เพื่อความเร็วในการโหลด (Browser Caching)
 <IfModule mod_expires.c>
-  ExpiresActive On
+    ExpiresActive On
 
-  # ตั้งค่าไฟล์รูปภาพ (.webp) ให้เก็บไว้ 1 ปี
-  ExpiresByType image/webp "access plus 1 year"
-  
-  # ตั้งค่าไฟล์ CSS ให้เก็บไว้ 1 เดือน (เผื่อมีการแก้ไขดีไซน์)
-  ExpiresByType text/css "access plus 1 month"
-  
-  # ไฟล์ไอคอนต่างๆ
-  ExpiresByType image/x-icon "access plus 1 year"
+    # รูปภาพ (webp, png, jpg, jpeg, gif) เก็บไว้ 1 ปี
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+
+    # ไฟล์ CSS และ JavaScript (เก็บไว้ 1 เดือน เผื่อมีการแก้ดีไซน์)
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+
+    # ไฟล์ไอคอนและฟอนต์
+    ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+
+    # กรณีไม่มีประเภทไฟล์ที่ระบุ ให้ใช้ค่าเริ่มต้น (ถ้าต้องการ)
+    # ExpiresDefault "access plus 2 days"
 </IfModule>
