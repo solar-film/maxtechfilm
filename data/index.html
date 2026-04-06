@@ -33,9 +33,35 @@
             background: #cbd5e1;
             border-radius: 4px;
         }
+        /* Lock Overlay Styles */
+        #authOverlay {
+            transition: all 0.3s ease-in-out;
+        }
     </style>
 </head>
 <body class="min-h-screen">
+
+    <!-- Password Protection Overlay -->
+    <div id="authOverlay" class="fixed inset-0 bg-slate-900 z-[100] flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 text-center">
+            <div class="bg-indigo-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">เข้าสู่ระบบความปลอดภัย</h2>
+            <p class="text-gray-500 mb-8">กรุณากรอกรหัสผ่านเพื่อเข้าชมข้อมูลยอดขาย</p>
+            
+            <div class="space-y-4">
+                <input type="password" id="passwordInput" placeholder="กรอกรหัสผ่าน" 
+                    class="w-full px-5 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-center text-xl tracking-[0.5em]">
+                <div id="authError" class="text-red-500 text-sm font-medium hidden">รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่</div>
+                <button onclick="checkPassword()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-indigo-100 active:scale-95">
+                    ตกลง
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Navbar / Header -->
     <nav class="bg-white border-b border-gray-200 px-6 py-4 flex flex-wrap justify-between items-center sticky top-0 z-50">
@@ -110,9 +136,12 @@
             <div class="card p-6 border-t-4 border-t-orange-500 bg-orange-50/20">
                 <div class="flex items-center justify-between">
                     <p class="text-xs text-orange-500 font-bold uppercase tracking-wider">TOP PERFORMER</p>
-                    <div class="bg-orange-100 p-2 rounded-lg text-orange-600">🏆</div>
+                    <div class="bg-orange-100 p-2 rounded-lg text-orange-600 text-xs font-bold px-3">🏆</div>
                 </div>
-                <h2 id="topPerformer" class="text-2xl font-bold text-gray-800 mt-2">-</h2>
+                <div id="topPerformerContainer">
+                    <h2 id="topPerformer" class="text-xl font-bold text-gray-800 mt-2 leading-tight">-</h2>
+                    <p id="topPerformerValue" class="text-sm font-semibold text-orange-600">฿0.00</p>
+                </div>
             </div>
         </div>
 
@@ -161,6 +190,7 @@
     <script>
         const SPREADSHEET_ID = '1Ag7yh0SFSqGfm3LTNinHwlwV6h5Xa4M2yIuf03mq2uc';
         const TAB_NAME = 'ยอดขายรายบุคคล';
+        const ACCESS_PASSWORD = '78963';
 
         let rawData = [];
         let staffNames = [];
@@ -170,10 +200,32 @@
         const monthOrder = { 'ม.ค.': 1, 'ก.พ.': 2, 'มี.ค.': 3, 'เม.ย.': 4, 'พ.ค.': 5, 'มิ.ย.': 6, 'ก.ค.': 7, 'ส.ค.': 8, 'ก.ย.': 9, 'ต.ค.': 10, 'พ.ย.': 11, 'ธ.ค.': 12 };
 
         window.onload = () => {
-            fetchData();
+            // ระบบตรวจสอบการกด Enter ในหน้า Password
+            document.getElementById('passwordInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') checkPassword();
+            });
+            
             document.getElementById('filterMonth').addEventListener('change', updateDisplay);
             document.getElementById('filterPerson').addEventListener('change', updateDisplay);
         };
+
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            const errorMsg = document.getElementById('authError');
+            const overlay = document.getElementById('authOverlay');
+
+            if (input === ACCESS_PASSWORD) {
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                    fetchData(); // เริ่มดึงข้อมูลหลังรหัสผ่านถูกต้อง
+                }, 300);
+            } else {
+                errorMsg.classList.remove('hidden');
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+            }
+        }
 
         async function fetchData() {
             showLoading(true);
@@ -190,11 +242,9 @@
             }
         }
 
-        // ฟังก์ชันช่วยแปลงค่า "Date(2025,0,1)" เป็น "ม.ค. 25" หรือรูปแบบที่ต้องการ
         function formatMonthValue(val) {
             if (!val) return "";
             if (typeof val === 'string' && val.startsWith('Date(')) {
-                // แยกค่าจาก Date(2025,0,1)
                 const parts = val.match(/\d+/g);
                 if (parts && parts.length >= 2) {
                     const yearFull = parseInt(parts[0]);
@@ -203,7 +253,6 @@
                     return `${monthNamesThai[monthIdx]} ${yearShort}`;
                 }
             }
-            // ถ้าเป็นรูปแบบอื่นๆ หรือ String อยู่แล้ว
             return val;
         }
 
@@ -220,7 +269,6 @@
             staffNames = table.cols.slice(2).map(col => col.label || "").filter(n => n && !n.includes('Column'));
             
             rawData = table.rows.map(row => {
-                // แก้ไขการดึงเดือนตรงนี้
                 let rawMonth = row.c[1]?.v || "";
                 let formattedMonth = formatMonthValue(rawMonth);
 
@@ -292,7 +340,16 @@
             document.getElementById('totalMHL').textContent = '฿' + totalMHL.toLocaleString(undefined, {minimumFractionDigits: 2});
             
             let topStaff = Object.entries(personTotals).sort((a, b) => b[1] - a[1])[0];
-            document.getElementById('topPerformer').textContent = (topStaff && topStaff[1] > 0) ? topStaff[0] : '-';
+            const topNameEl = document.getElementById('topPerformer');
+            const topValEl = document.getElementById('topPerformerValue');
+
+            if (topStaff && topStaff[1] > 0) {
+                topNameEl.textContent = topStaff[0];
+                topValEl.textContent = '฿' + topStaff[1].toLocaleString(undefined, {minimumFractionDigits: 2});
+            } else {
+                topNameEl.textContent = '-';
+                topValEl.textContent = '฿0.00';
+            }
 
             renderChart(filtered, selectedPerson);
             renderTable(filtered);
