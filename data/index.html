@@ -33,9 +33,16 @@
             background: #cbd5e1;
             border-radius: 4px;
         }
-        /* Lock Overlay Styles */
         #authOverlay {
             transition: all 0.3s ease-in-out;
+        }
+        .filter-select {
+            @apply bg-white border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block p-2.5 transition shadow-sm outline-none cursor-pointer;
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
     </style>
 </head>
@@ -64,38 +71,41 @@
     </div>
 
     <!-- Navbar / Header -->
-    <nav class="bg-white border-b border-gray-200 px-6 py-4 flex flex-wrap justify-between items-center sticky top-0 z-50">
-        <div class="flex items-center space-x-4">
-            <div class="bg-indigo-600 p-2 rounded-xl text-white shadow-lg shadow-indigo-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-            </div>
-            <div>
-                <h1 class="text-xl font-bold text-gray-800 leading-tight">ระบบวิเคราะห์ยอดขาย</h1>
-                <p class="text-xs text-gray-500 font-medium">Real-time Performance Tracking</p>
-            </div>
-        </div>
-        
-        <div class="flex flex-wrap items-center gap-3 mt-4 lg:mt-0">
-            <div class="relative">
-                <select id="filterMonth" class="appearance-none bg-white border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-40 p-2.5 pr-8 transition shadow-sm">
-                    <option value="all">🗓️ ทุกช่วงเวลา</option>
-                </select>
+    <nav class="bg-white border-b border-gray-200 px-6 py-4 sticky top-0 z-50">
+        <div class="max-w-[1600px] mx-auto flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+            <div class="flex items-center space-x-4">
+                <div class="bg-indigo-600 p-2 rounded-xl text-white shadow-lg shadow-indigo-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-gray-800 leading-tight">ระบบวิเคราะห์ยอดขาย</h1>
+                    <p class="text-xs text-gray-500 font-medium uppercase tracking-wider">Performance by Month</p>
+                </div>
             </div>
             
-            <div class="relative">
-                <select id="filterPerson" class="appearance-none bg-white border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-44 p-2.5 pr-8 transition shadow-sm">
-                    <option value="all">👤 พนักงานทุกคน</option>
-                </select>
-            </div>
+            <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+                <div class="flex items-center gap-2 bg-gray-50 p-1.5 rounded-lg border border-gray-200">
+                    <span class="text-xs font-bold text-gray-500 ml-2">ตั้งแต่:</span>
+                    <select id="startMonth" class="filter-select w-32 h-9" onchange="updateDisplay()"></select>
+                    <span class="text-gray-400">ถึง:</span>
+                    <select id="endMonth" class="filter-select w-32 h-9" onchange="updateDisplay()"></select>
+                </div>
 
-            <button onclick="fetchData()" class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-5 rounded-lg transition duration-200 shadow-md shadow-indigo-100">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
-                รีเฟรช
-            </button>
+                <div class="relative">
+                    <select id="filterPerson" class="filter-select w-44 h-9" onchange="updateDisplay()">
+                        <option value="all">👤 พนักงานทุกคน</option>
+                    </select>
+                </div>
+
+                <button onclick="fetchData()" class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-5 rounded-lg transition duration-200 shadow-md shadow-indigo-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    รีเฟรช
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -109,6 +119,7 @@
             </div>
         </div>
 
+        <!-- Summary Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="card p-6 border-t-4 border-t-indigo-500">
                 <div class="flex items-center justify-between">
@@ -145,23 +156,13 @@
             </div>
         </div>
 
+        <!-- Chart Section -->
         <div class="grid grid-cols-1 gap-6">
             <div class="card p-6 bg-white">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
                     <div>
-                        <h3 class="text-lg font-bold text-gray-800">กราฟเปรียบเทียบผลงาน</h3>
-                        <p class="text-sm text-gray-500">วิเคราะห์ยอดขายแยกตามบริษัทและยอดรวมสะสม</p>
-                    </div>
-                    <div class="flex flex-wrap items-center gap-4 bg-gray-50 p-3 rounded-xl border border-gray-100">
-                        <div class="flex items-center gap-2 text-xs font-semibold text-gray-600">
-                            <span class="inline-block w-4 h-2 bg-blue-500 rounded-full shadow-sm"></span> MHL
-                        </div>
-                        <div class="flex items-center gap-2 text-xs font-semibold text-gray-600">
-                            <span class="inline-block w-4 h-2 bg-emerald-500 rounded-full shadow-sm"></span> GFS
-                        </div>
-                        <div class="flex items-center gap-2 text-xs font-semibold text-orange-500">
-                            <span class="inline-block w-6 h-0.5 border-t-2 border-orange-400"></span> ยอดรวม 2 บริษัท
-                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">กราฟเปรียบเทียบผลงานรายบุคคล</h3>
+                        <p class="text-sm text-gray-500">ยอดขายรวมสะสม (MHL + GFS) ตามช่วงเวลาที่เลือก</p>
                     </div>
                 </div>
                 <div class="chart-container">
@@ -170,18 +171,35 @@
             </div>
         </div>
 
+        <!-- Individual Summary Section (Collapsible) -->
+        <div class="space-y-4">
+            <button onclick="toggleSummary()" class="flex items-center gap-2 bg-white hover:bg-gray-50 text-gray-700 font-bold py-3 px-6 rounded-xl border border-gray-200 transition-all shadow-sm">
+                <span id="summaryToggleIcon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" id="chevronIcon">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </span>
+                สรุปผลงานรายบุคคลอย่างละเอียด
+            </button>
+            
+            <div id="summaryContent" class="hidden overflow-hidden transition-all duration-500">
+                <div id="individualSummaryGrid" class="summary-grid">
+                    <!-- Cards will be generated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Section -->
         <div class="card overflow-hidden">
             <div class="px-6 py-4 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
-                <h3 class="text-lg font-bold text-gray-700">รายการข้อมูลทั้งหมด</h3>
+                <h3 class="text-lg font-bold text-gray-700">รายการข้อมูลแยกตามเดือน</h3>
             </div>
             <div class="table-container overflow-x-auto">
                 <table class="w-full text-sm text-left border-collapse">
                     <thead class="text-xs font-bold text-gray-500 uppercase bg-gray-100/50 sticky top-0">
-                        <tr id="tableHeader">
-                        </tr>
+                        <tr id="tableHeader"></tr>
                     </thead>
-                    <tbody id="tableBody" class="divide-y divide-gray-100">
-                    </tbody>
+                    <tbody id="tableBody" class="divide-y divide-gray-100"></tbody>
                 </table>
             </div>
         </div>
@@ -195,18 +213,14 @@
         let rawData = [];
         let staffNames = [];
         let salesChart = null;
+        let isSummaryVisible = false;
 
         const monthNamesThai = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
-        const monthOrder = { 'ม.ค.': 1, 'ก.พ.': 2, 'มี.ค.': 3, 'เม.ย.': 4, 'พ.ค.': 5, 'มิ.ย.': 6, 'ก.ค.': 7, 'ส.ค.': 8, 'ก.ย.': 9, 'ต.ค.': 10, 'พ.ย.': 11, 'ธ.ค.': 12 };
 
         window.onload = () => {
-            // ระบบตรวจสอบการกด Enter ในหน้า Password
             document.getElementById('passwordInput').addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') checkPassword();
             });
-            
-            document.getElementById('filterMonth').addEventListener('change', updateDisplay);
-            document.getElementById('filterPerson').addEventListener('change', updateDisplay);
         };
 
         function checkPassword() {
@@ -218,7 +232,7 @@
                 overlay.style.opacity = '0';
                 setTimeout(() => {
                     overlay.classList.add('hidden');
-                    fetchData(); // เริ่มดึงข้อมูลหลังรหัสผ่านถูกต้อง
+                    fetchData();
                 }, 300);
             } else {
                 errorMsg.classList.remove('hidden');
@@ -242,39 +256,36 @@
             }
         }
 
-        function formatMonthValue(val) {
-            if (!val) return "";
-            if (typeof val === 'string' && val.startsWith('Date(')) {
-                const parts = val.match(/\d+/g);
-                if (parts && parts.length >= 2) {
-                    const yearFull = parseInt(parts[0]);
-                    const monthIdx = parseInt(parts[1]);
-                    const yearShort = yearFull.toString().slice(-2);
-                    return `${monthNamesThai[monthIdx]} ${yearShort}`;
-                }
-            }
-            return val;
+        function parseGoogleDate(dateStr) {
+            if (!dateStr || typeof dateStr !== 'string' || !dateStr.startsWith('Date(')) return null;
+            const parts = dateStr.match(/\d+/g);
+            if (!parts || parts.length < 3) return null;
+            return new Date(parseInt(parts[0]), parseInt(parts[1]), parseInt(parts[2]));
         }
 
-        function sortMonths(months) {
-            return months.sort((a, b) => {
-                const [m1, y1] = a.split(' ');
-                const [m2, y2] = b.split(' ');
-                if (y1 !== y2) return parseInt(y1) - parseInt(y2);
-                return monthOrder[m1] - monthOrder[m2];
-            });
+        function formatDateToThai(date) {
+            if (!date) return "";
+            const m = monthNamesThai[date.getMonth()];
+            const y = (date.getFullYear() + 543).toString().slice(-2);
+            return `${m} ${y}`;
+        }
+
+        function getMonthKey(date) {
+            return date.getFullYear() * 100 + date.getMonth();
         }
 
         function processSheetData(table) {
             staffNames = table.cols.slice(2).map(col => col.label || "").filter(n => n && !n.includes('Column'));
             
             rawData = table.rows.map(row => {
-                let rawMonth = row.c[1]?.v || "";
-                let formattedMonth = formatMonthValue(rawMonth);
+                const dateObj = parseGoogleDate(row.c[1]?.v);
+                if (!dateObj) return null;
 
                 const item = {
                     company: row.c[0]?.v || "",
-                    month: formattedMonth,
+                    date: dateObj,
+                    monthKey: getMonthKey(dateObj),
+                    monthLabel: formatDateToThai(dateObj),
                     sales: {}
                 };
                 
@@ -283,25 +294,38 @@
                     item.sales[name] = typeof cellVal === 'number' ? cellVal : 0;
                 });
                 return item;
-            }).filter(item => item.company && item.month);
+            }).filter(item => item && item.company);
 
             updateFilters();
             updateDisplay();
         }
 
         function updateFilters() {
-            const monthSelect = document.getElementById('filterMonth');
+            const startSelect = document.getElementById('startMonth');
+            const endSelect = document.getElementById('endMonth');
             const personSelect = document.getElementById('filterPerson');
-            
-            const months = sortMonths([...new Set(rawData.map(d => d.month))]);
-            
-            monthSelect.innerHTML = '<option value="all">🗓️ ทุกช่วงเวลา</option>';
-            months.forEach(m => {
-                const opt = document.createElement('option');
-                opt.value = m;
-                opt.textContent = m;
-                monthSelect.appendChild(opt);
+
+            const uniqueMonths = [];
+            const map = new Map();
+            for (const item of rawData) {
+                if (!map.has(item.monthKey)) {
+                    map.set(item.monthKey, true);
+                    uniqueMonths.push({ key: item.monthKey, label: item.monthLabel });
+                }
+            }
+            uniqueMonths.sort((a, b) => a.key - b.key);
+
+            startSelect.innerHTML = "";
+            endSelect.innerHTML = "";
+            uniqueMonths.forEach(m => {
+                startSelect.innerHTML += `<option value="${m.key}">${m.label}</option>`;
+                endSelect.innerHTML += `<option value="${m.key}">${m.label}</option>`;
             });
+
+            if (uniqueMonths.length > 0) {
+                startSelect.value = uniqueMonths[0].key;
+                endSelect.value = uniqueMonths[uniqueMonths.length - 1].key;
+            }
 
             personSelect.innerHTML = '<option value="all">👤 พนักงานทุกคน</option>';
             staffNames.forEach(name => {
@@ -312,26 +336,53 @@
             });
         }
 
+        function toggleSummary() {
+            const content = document.getElementById('summaryContent');
+            const icon = document.getElementById('chevronIcon');
+            isSummaryVisible = !isSummaryVisible;
+            
+            if (isSummaryVisible) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
         function updateDisplay() {
-            const selectedMonth = document.getElementById('filterMonth').value;
+            const startKey = parseInt(document.getElementById('startMonth').value);
+            const endKey = parseInt(document.getElementById('endMonth').value);
             const selectedPerson = document.getElementById('filterPerson').value;
 
-            let filtered = rawData;
-            if (selectedMonth !== 'all') {
-                filtered = filtered.filter(d => d.month === selectedMonth);
-            }
+            let filtered = rawData.filter(item => {
+                const min = Math.min(startKey, endKey);
+                const max = Math.max(startKey, endKey);
+                return item.monthKey >= min && item.monthKey <= max;
+            });
 
             let totalAll = 0, totalGFS = 0, totalMHL = 0;
             let personTotals = {};
-            staffNames.forEach(n => personTotals[n] = 0);
+            let personCompanyTotals = {}; // { Name: { MHL: 0, GFS: 0 } }
+
+            staffNames.forEach(n => {
+                personTotals[n] = 0;
+                personCompanyTotals[n] = { MHL: 0, GFS: 0 };
+            });
 
             filtered.forEach(item => {
                 staffNames.forEach(n => {
                     const val = item.sales[n];
                     totalAll += val;
                     personTotals[n] += val;
-                    if (item.company === 'GFS') totalGFS += val;
-                    if (item.company === 'MHL') totalMHL += val;
+                    if (item.company === 'GFS') {
+                        totalGFS += val;
+                        personCompanyTotals[n].GFS += val;
+                    }
+                    if (item.company === 'MHL') {
+                        totalMHL += val;
+                        personCompanyTotals[n].MHL += val;
+                    }
                 });
             });
 
@@ -340,19 +391,61 @@
             document.getElementById('totalMHL').textContent = '฿' + totalMHL.toLocaleString(undefined, {minimumFractionDigits: 2});
             
             let topStaff = Object.entries(personTotals).sort((a, b) => b[1] - a[1])[0];
-            const topNameEl = document.getElementById('topPerformer');
-            const topValEl = document.getElementById('topPerformerValue');
-
             if (topStaff && topStaff[1] > 0) {
-                topNameEl.textContent = topStaff[0];
-                topValEl.textContent = '฿' + topStaff[1].toLocaleString(undefined, {minimumFractionDigits: 2});
+                document.getElementById('topPerformer').textContent = topStaff[0];
+                document.getElementById('topPerformerValue').textContent = '฿' + topStaff[1].toLocaleString(undefined, {minimumFractionDigits: 2});
             } else {
-                topNameEl.textContent = '-';
-                topValEl.textContent = '฿0.00';
+                document.getElementById('topPerformer').textContent = '-';
+                document.getElementById('topPerformerValue').textContent = '฿0.00';
             }
 
             renderChart(filtered, selectedPerson);
             renderTable(filtered);
+            renderIndividualSummary(personTotals, personCompanyTotals, totalAll, selectedPerson);
+        }
+
+        function renderIndividualSummary(totals, companyTotals, grandTotal, selectedPerson) {
+            const container = document.getElementById('individualSummaryGrid');
+            container.innerHTML = "";
+
+            let displayStaff = selectedPerson === 'all' ? staffNames : [selectedPerson];
+
+            displayStaff.forEach(name => {
+                const total = totals[name];
+                const share = grandTotal > 0 ? ((total / grandTotal) * 100).toFixed(1) : 0;
+                const mhl = companyTotals[name].MHL;
+                const gfs = companyTotals[name].GFS;
+
+                const card = document.createElement('div');
+                card.className = "card p-5 border-l-4 border-l-indigo-600";
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-4">
+                        <h4 class="font-bold text-gray-800 text-lg">${name}</h4>
+                        <span class="bg-indigo-100 text-indigo-700 text-[10px] font-bold px-2 py-1 rounded-md">ส่วนแบ่ง ${share}%</span>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-500">ยอดรวมทั้งหมด</span>
+                            <span class="font-bold text-indigo-600">฿${total.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-1.5 overflow-hidden flex">
+                            <div class="bg-blue-500 h-full" style="width: ${total > 0 ? (mhl/total*100) : 0}%"></div>
+                            <div class="bg-emerald-500 h-full" style="width: ${total > 0 ? (gfs/total*100) : 0}%"></div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 mt-2">
+                            <div class="bg-blue-50 p-2 rounded-lg">
+                                <p class="text-[10px] text-blue-500 font-bold uppercase">MHL</p>
+                                <p class="text-xs font-bold text-gray-700">฿${mhl.toLocaleString()}</p>
+                            </div>
+                            <div class="bg-emerald-50 p-2 rounded-lg">
+                                <p class="text-[10px] text-emerald-500 font-bold uppercase">GFS</p>
+                                <p class="text-xs font-bold text-gray-700">฿${gfs.toLocaleString()}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
         }
 
         function renderChart(data, selectedPerson) {
@@ -365,7 +458,6 @@
             const gfsData = displayStaff.map(name => 
                 data.filter(d => d.company === 'GFS').reduce((sum, d) => sum + d.sales[name], 0)
             );
-            const lineData = displayStaff.map((_, i) => mhlData[i] + gfsData[i]);
 
             if (salesChart) salesChart.destroy();
 
@@ -375,42 +467,47 @@
                     labels: displayStaff,
                     datasets: [
                         {
-                            label: 'MHL Sales',
+                            label: 'ยอด MHL',
                             data: mhlData,
                             backgroundColor: '#3b82f6',
-                            borderRadius: 6,
-                            stack: 'company'
+                            borderRadius: 4
                         },
                         {
-                            label: 'GFS Sales',
+                            label: 'ยอด GFS',
                             data: gfsData,
                             backgroundColor: '#10b981',
-                            borderRadius: 6,
-                            stack: 'company'
-                        },
-                        {
-                            label: 'Total',
-                            data: lineData,
-                            type: 'line',
-                            borderColor: '#f97316',
-                            borderWidth: 3,
-                            pointBackgroundColor: '#fff',
-                            pointBorderColor: '#f97316',
-                            pointRadius: 5,
-                            tension: 0.4
+                            borderRadius: 4
                         }
                     ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
+                    plugins: { 
+                        legend: { position: 'bottom' },
+                        tooltip: { 
+                            mode: 'index', 
+                            intersect: false,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) label += ': ';
+                                    if (context.parsed.y !== null) label += '฿' + context.parsed.y.toLocaleString();
+                                    return label;
+                                }
+                            }
+                        }
+                    },
                     scales: {
                         y: { 
+                            stacked: true,
                             beginAtZero: true, 
-                            ticks: { callback: v => v >= 1000 ? (v/1000).toLocaleString() + 'k' : v }
+                            ticks: { callback: v => '฿' + v.toLocaleString() }
                         },
-                        x: { grid: { display: false } }
+                        x: { 
+                            stacked: true,
+                            grid: { display: false } 
+                        }
                     }
                 }
             });
@@ -422,19 +519,21 @@
             
             headerRow.innerHTML = `
                 <th class="px-6 py-4 border-b">บริษัท</th>
-                <th class="px-6 py-4 border-b text-center">เดือนที่ติดตั้ง</th>
+                <th class="px-6 py-4 border-b text-center">เดือน</th>
                 ${staffNames.map(n => `<th class="px-6 py-4 border-b text-right">${n}</th>`).join('')}
             `;
 
-            tableBody.innerHTML = data.map(item => `
+            const sortedData = [...data].sort((a, b) => b.monthKey - a.monthKey);
+
+            tableBody.innerHTML = sortedData.map(item => `
                 <tr class="hover:bg-indigo-50/30 transition-colors">
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${item.company === 'GFS' ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-100 text-blue-700'}">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold ${item.company === 'GFS' ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-100 text-blue-700'}">
                             ${item.company}
                         </span>
                     </td>
                     <td class="px-6 py-4 text-center whitespace-nowrap">
-                        <span class="bg-slate-100 px-3 py-1 rounded-md text-xs border border-slate-200">${item.month}</span>
+                        <span class="bg-slate-100 px-3 py-1 rounded-md text-xs font-medium border border-slate-200">${item.monthLabel}</span>
                     </td>
                     ${staffNames.map(n => `
                         <td class="px-6 py-4 text-right tabular-nums text-gray-700 font-medium ${item.sales[n] === 0 ? 'text-gray-300' : ''}">
